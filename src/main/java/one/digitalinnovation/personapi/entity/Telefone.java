@@ -20,7 +20,7 @@ public class Telefone {
     private Long id;
 
     @Column(nullable = false)
-    private Integer numero;
+    private String numero;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
