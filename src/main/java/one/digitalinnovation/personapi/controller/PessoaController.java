@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PessoaController {
     @GetMapping
     public String hello(){
-        return "Te amo meu bem";
+        return "<h1>Te amo meu bem</h1>";
     }
 }
