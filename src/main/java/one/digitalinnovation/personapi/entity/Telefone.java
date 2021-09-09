@@ -3,15 +3,14 @@ package one.digitalinnovation.personapi.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import one.digitalinnovation.personapi.enums.TipoTelefone;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa {
+public class Telefone {
+
     private Long id;
-    private String nome;
-    private String cpf;
-    private List<Telefone> telefones;
+    private Integer numero;
+    private TipoTelefone tipoTelefone;
 }
