@@ -1,9 +1,10 @@
-package one.digitalinnovation.personapi.dto.request;
+package one.digitalinnovation.personapi.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import one.digitalinnovation.personapi.dto.request.TelefoneDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
@@ -15,7 +16,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PessoaDTO {
+public class PessoaResponseDTO {
+
+    private Long id;
 
     @NotEmpty
     @Size(min = 2, max = 100)
@@ -28,4 +31,5 @@ public class PessoaDTO {
     @Valid
     @NotEmpty
     private List<TelefoneDTO> telefones;
+
 }
