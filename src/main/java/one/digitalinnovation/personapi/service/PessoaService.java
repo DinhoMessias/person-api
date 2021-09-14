@@ -24,9 +24,7 @@ public class PessoaService {
     public MessageResponseDTO createPessoa(PessoaRequestDTO pessoaDTO) {
         Pessoa pessoaToSave = pessoaMapper.toEntity(pessoaDTO);
         Pessoa savedPessoa = pessoaRepository.save(pessoaToSave);
-        return MessageResponseDTO.builder()
-                .message("Pessoa criada com id: " + savedPessoa.getId())
-                .build();
+        return createMessageResponseDTO("Pessoa criada com id: ", savedPessoa.getId());
     }
 
     public List<PessoaResponseDTO> findAll() {
@@ -47,8 +45,22 @@ public class PessoaService {
         pessoaRepository.delete(pessoa);
     }
 
+    public MessageResponseDTO editPessoa(Long id, PessoaRequestDTO pessoaDTO) throws PessoaNotFoundException {
+        verifyById(id);
+        Pessoa pessoaToSave = pessoaMapper.toEntity(pessoaDTO);
+        pessoaToSave.setId(id);
+        Pessoa savedPessoa = pessoaRepository.save(pessoaToSave);
+        return createMessageResponseDTO("Pessoa editada com id: ", savedPessoa.getId());
+    }
+
     private Pessoa verifyById(Long id) throws PessoaNotFoundException {
         return pessoaRepository.findById(id).orElseThrow(()
-                    -> new PessoaNotFoundException(id));
+                -> new PessoaNotFoundException(id));
+    }
+
+    private MessageResponseDTO createMessageResponseDTO(String message, Long id) {
+        return MessageResponseDTO.builder()
+                .message(message + id)
+                .build();
     }
 }
