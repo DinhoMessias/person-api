@@ -1,6 +1,7 @@
 package one.digitalinnovation.personapi.controller;
 
-import one.digitalinnovation.personapi.dto.request.PessoaRequestDTO;
+import one.digitalinnovation.personapi.dto.request.PessoaCreateRequestDTO;
+import one.digitalinnovation.personapi.dto.request.PessoaUpdateRequestDTO;
 import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.personapi.dto.response.PessoaResponseDTO;
 import one.digitalinnovation.personapi.exception.PessoaNotFoundException;
@@ -20,7 +21,7 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public MessageResponseDTO createPessoa (@RequestBody PessoaRequestDTO pessoaDTO){
+    public MessageResponseDTO createPessoa (@RequestBody PessoaCreateRequestDTO pessoaDTO){
         return pessoaService.createPessoa(pessoaDTO);
     }
 
@@ -35,8 +36,8 @@ public class PessoaController {
     }
 
     @PutMapping(path = "/{id}")
-    public MessageResponseDTO editPessoa(@PathVariable Long id, @RequestBody PessoaRequestDTO pessoaDTO) throws PessoaNotFoundException {
-        return pessoaService.editPessoa(id, pessoaDTO);
+    public MessageResponseDTO editPessoa(@PathVariable Long id, @RequestBody PessoaUpdateRequestDTO pessoaUpdate) throws PessoaNotFoundException {
+        return pessoaService.editPessoa(id, pessoaUpdate);
     }
 
     @DeleteMapping(path = "/{id}")
