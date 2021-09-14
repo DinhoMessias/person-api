@@ -1,7 +1,7 @@
 package one.digitalinnovation.personapi.controller;
 
-import one.digitalinnovation.personapi.dto.MessageResponseDTO;
-import one.digitalinnovation.personapi.entity.Pessoa;
+import one.digitalinnovation.personapi.dto.request.PessoaDTO;
+import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.personapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,8 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public MessageResponseDTO createPessoa (@RequestBody Pessoa pessoa){
-        return pessoaService.createPessoa(pessoa);
+    public MessageResponseDTO createPessoa (@RequestBody PessoaDTO pessoaDTO){
+        return pessoaService.createPessoa(pessoaDTO);
     }
 
     @GetMapping

@@ -10,5 +10,5 @@ public enum TipoTelefone {
     COMERCIAL("Comercial"),
     CELULAR("Recado");
 
-    private final String tipo;
+    private String tipo;
 }
