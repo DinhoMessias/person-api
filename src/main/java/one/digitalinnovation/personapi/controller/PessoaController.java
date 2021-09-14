@@ -6,6 +6,7 @@ import one.digitalinnovation.personapi.dto.response.PessoaResponseDTO;
 import one.digitalinnovation.personapi.exception.PessoaNotFoundException;
 import one.digitalinnovation.personapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class PessoaController {
     @GetMapping(path = "/{id}")
     public PessoaResponseDTO findById(@PathVariable Long id) throws PessoaNotFoundException {
         return pessoaService.findById(id);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete (@PathVariable Long id) throws PessoaNotFoundException {
+        pessoaService.delete(id);
     }
 /*    @GetMapping
     public String hello(){
