@@ -1,6 +1,7 @@
 package one.digitalinnovation.personapi.service;
 
-import one.digitalinnovation.personapi.dto.request.PessoaRequestDTO;
+import one.digitalinnovation.personapi.dto.request.PessoaCreateRequestDTO;
+import one.digitalinnovation.personapi.dto.request.PessoaUpdateRequestDTO;
 import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.personapi.dto.response.PessoaResponseDTO;
 import one.digitalinnovation.personapi.entity.Pessoa;
@@ -21,7 +22,7 @@ public class PessoaService {
 
     private final PessoaMapper pessoaMapper = PessoaMapper.INSTANCE;
 
-    public MessageResponseDTO createPessoa(PessoaRequestDTO pessoaDTO) {
+    public MessageResponseDTO createPessoa(PessoaCreateRequestDTO pessoaDTO) {
         Pessoa pessoaToSave = pessoaMapper.toEntity(pessoaDTO);
         Pessoa savedPessoa = pessoaRepository.save(pessoaToSave);
         return createMessageResponseDTO("Pessoa criada com id: ", savedPessoa.getId());
@@ -31,13 +32,13 @@ public class PessoaService {
 
         List<Pessoa> pessoas = pessoaRepository.findAll();
         return pessoas.stream().
-                map(pessoaMapper::toResponseDTO).
+                map(pessoaMapper::toDTO).
                 collect(Collectors.toList());
     }
 
     public PessoaResponseDTO findById(Long id) throws PessoaNotFoundException {
         Pessoa pessoa = verifyById(id);
-        return pessoaMapper.toResponseDTO(pessoa);
+        return pessoaMapper.toDTO(pessoa);
     }
 
     public void delete(Long id) throws PessoaNotFoundException {
@@ -45,11 +46,10 @@ public class PessoaService {
         pessoaRepository.delete(pessoa);
     }
 
-    public MessageResponseDTO editPessoa(Long id, PessoaRequestDTO pessoaDTO) throws PessoaNotFoundException {
+    public MessageResponseDTO editPessoa(Long id, PessoaUpdateRequestDTO pessoaUpdate) throws PessoaNotFoundException {
         verifyById(id);
-        Pessoa pessoaToSave = pessoaMapper.toEntity(pessoaDTO);
-        pessoaToSave.setId(id);
-        Pessoa savedPessoa = pessoaRepository.save(pessoaToSave);
+        Pessoa pessoaToUpdate = pessoaMapper.toEntity(pessoaUpdate);
+        Pessoa savedPessoa = pessoaRepository.save(pessoaToUpdate);
         return createMessageResponseDTO("Pessoa editada com id: ", savedPessoa.getId());
     }
 

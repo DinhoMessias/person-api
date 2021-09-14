@@ -13,9 +13,12 @@ import java.util.List;
 
 @Builder
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class PessoaRequestDTO {
+@NoArgsConstructor
+public class PessoaUpdateRequestDTO {
+
+    @NotEmpty
+    private Long id;
 
     @NotEmpty
     @Size(min = 2, max = 100)
@@ -28,4 +31,5 @@ public class PessoaRequestDTO {
     @Valid
     @NotEmpty
     private List<TelefoneDTO> telefones;
+
 }
